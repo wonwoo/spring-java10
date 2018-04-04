@@ -1,5 +1,7 @@
 package ml.wonwoo.springjava10;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -22,11 +24,7 @@ public class SpringJava10Application {
     @Bean
     CommandLineRunner commandLineRunner(PersonRepository personRepository) {
         return args -> {
-            var wonwoo = personRepository.save(new Person("wonwoo"));
-            var kevin = personRepository.save(new Person("kevin"));
-            logger.info("wonwoo : {}", wonwoo);
-            logger.info("kevin : {} ", kevin);
-            var persons = personRepository.findAll();
+            var persons = personRepository.saveAll(List.of(new Person("wonwoo"), new Person("kevin")));
             logger.info("persons : {}", persons);
         };
     }
